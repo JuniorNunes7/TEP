@@ -37,18 +37,18 @@
               <div class="col-6">
                 <label>
                   Horário de início
-                  <input type="text" class="form-control" v-model="schedule.start_time">
+                  <the-mask :mask="['##:##']" class="form-control" masked v-model="schedule.start_time" />
                 </label>
               </div>
               <div class="col-6">
                 <label>
                   Horário de término
-                  <input type="text" class="form-control" v-model="schedule.end_time">
+                  <the-mask :mask="['##:##']" class="form-control" masked v-model="schedule.end_time" />
                 </label>
               </div>
             </div>
           </div>
-
+          {{ teacher.schedules }}
           <button class="btn btn-success" @click="addSchedule"> <i class="icon-plus"></i> Adicionar horário</button>
       </div>
 
@@ -63,6 +63,8 @@
 
 <script>
 
+import {TheMask} from 'vue-the-mask'
+
 const defaultSchedule = {
   weekday: '',
   start_time: '',
@@ -71,6 +73,8 @@ const defaultSchedule = {
 
 export default {
   name: 'TeacherCreate',
+
+  components: {TheMask},
 
   data () {
     return {

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Support\Validation\Time;
 
 class TeacherCreateRequest extends FormRequest
 {
@@ -25,8 +27,11 @@ class TeacherCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:255'],
-            'course' => ['required'],
-            'schedule' => ['array', 'required']
+            'course' => ['required', Rule::in(['Sistemas de Informação', 'História', 'Educação Física', 'Fisioterapia', 'Engenharia'])],
+            'schedules' => ['array', 'required'],
+            'schedules.*.weekday' => ['required', Rule::in(['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'])],
+            'schedules.*.start_time' => ['required', new Time],
+            'schedules.*.end_time' => ['required', new Time],
         ];
     }
 }

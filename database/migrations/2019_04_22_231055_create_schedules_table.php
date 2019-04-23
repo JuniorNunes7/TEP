@@ -15,7 +15,13 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('teacher_id')->index();
+            $table->enum('weekday', ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']);
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
+
+            $table->foreign('teacher_id')->references('id')->on('teachers');
         });
     }
 

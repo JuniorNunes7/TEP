@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\TeacherCreateRequest;
+use App\Models\Teacher;
 
 class TeacherController extends Controller
 {
@@ -15,6 +16,12 @@ class TeacherController extends Controller
 
     public function store(TeacherCreateRequest $request)
     {
-        echo "<pre>"; print_r($request->all()); exit;
+        return \DB::transaction(function() use ($request) {
+            $teacher = Teacher::create($request->only('name', 'course'));
+
+            $teacher->schedules()->createMany($request->schedules);
+
+            return $teacher;
+        });
     }
 }
