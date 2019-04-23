@@ -54,7 +54,7 @@
 
       <div class="form-group mt-5">
           <button @click="saveTeacher" type="button" class="btn btn-primary mr-3">Enviar</button>
-          <input type="reset" value="Cancelar" class="btn btn-secondary">
+          <button @click="resetForm" class="btn btn-secondary">Cancelar</button>
       </div>
     
     </div>
@@ -87,6 +87,7 @@ export default {
 
   data () {
     return {
+      errors: {},
       weekdays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
       teacher: _.cloneDeep(defaultTeacher)
     }
@@ -101,6 +102,10 @@ export default {
       this.teacher.schedules.splice(i, 1)
     },
 
+    resetForm () {
+      this.teacher = _.cloneDeep(defaultTeacher)
+    },
+
     saveTeacher() {
       axios({
         method: 'POST',
@@ -108,9 +113,15 @@ export default {
         data: this.teacher
       }).then((result) => {
         Swal.fire('', 'Professor criado com sucesso!', 'success')
-        this.teacher = _.cloneDeep(defaultTeacher)
+        this.resetForm()
       }).catch((error) => {
-        Swal.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error')
+        let errors = _.get(error, 'response.data.errors', false)
+
+        if(errors) {
+          Swal.fire('', _.toArray(errors).join('<br>'), 'error')
+        } else {
+          Swal.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error')
+        }
         console.log('e', error.response);
       })
 

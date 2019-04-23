@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('/teacher/create');
 });
 
 Route::get('/teacher/create', 'TeacherController@create');

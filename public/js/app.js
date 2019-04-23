@@ -1849,6 +1849,7 @@ var defaultTeacher = {
   },
   data: function data() {
     return {
+      errors: {},
       weekdays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
       teacher: _.cloneDeep(defaultTeacher)
     };
@@ -1860,6 +1861,9 @@ var defaultTeacher = {
     removeSchedule: function removeSchedule(i) {
       this.teacher.schedules.splice(i, 1);
     },
+    resetForm: function resetForm() {
+      this.teacher = _.cloneDeep(defaultTeacher);
+    },
     saveTeacher: function saveTeacher() {
       var _this = this;
 
@@ -1869,9 +1873,17 @@ var defaultTeacher = {
         data: this.teacher
       }).then(function (result) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Professor criado com sucesso!', 'success');
-        _this.teacher = _.cloneDeep(defaultTeacher);
+
+        _this.resetForm();
       })["catch"](function (error) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error');
+        var errors = _.get(error, 'response.data.errors', false);
+
+        if (errors) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', _.toArray(errors).join('<br>'), 'error');
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error');
+        }
+
         console.log('e', error.response);
       });
       console.log('teste');
@@ -40153,10 +40165,11 @@ var render = function() {
           [_vm._v("Enviar")]
         ),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "reset", value: "Cancelar" }
-        })
+        _c(
+          "button",
+          { staticClass: "btn btn-secondary", on: { click: _vm.resetForm } },
+          [_vm._v("Cancelar")]
+        )
       ])
     ])
   ])
