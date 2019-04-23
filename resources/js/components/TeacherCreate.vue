@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-          {{ teacher.schedules }}
+
           <button class="btn btn-success" @click="addSchedule"> <i class="icon-plus"></i> Adicionar horário</button>
       </div>
 
@@ -64,11 +64,20 @@
 <script>
 
 import {TheMask} from 'vue-the-mask'
+import Swal from 'sweetalert2'
 
 const defaultSchedule = {
   weekday: '',
   start_time: '',
   end_time: ''
+}
+
+const defaultTeacher = {
+  name: '',
+  course: '',
+  schedules: [
+    _.cloneDeep(defaultSchedule)
+  ]
 }
 
 export default {
@@ -79,13 +88,7 @@ export default {
   data () {
     return {
       weekdays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-      teacher: {
-        name: '',
-        course: '',
-        schedules: [
-          _.cloneDeep(defaultSchedule)
-        ]
-      }
+      teacher: _.cloneDeep(defaultTeacher)
     }
   },
 
@@ -98,20 +101,16 @@ export default {
       this.teacher.schedules.splice(i, 1)
     },
 
-    createObject(key, value) {
-      let a = {}
-      a[key] = value
-      return a
-    },
-
     saveTeacher() {
       axios({
         method: 'POST',
         url: '/teacher/create',
         data: this.teacher
       }).then((result) => {
-        console.log(result);
+        Swal.fire('', 'Professor criado com sucesso!', 'success')
+        this.teacher = _.cloneDeep(defaultTeacher)
       }).catch((error) => {
+        Swal.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error')
         console.log('e', error.response);
       })
 
