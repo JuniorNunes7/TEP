@@ -12,9 +12,18 @@
 */
 
 Route::get('/', function () {
-    return redirect('/teacher/create');
+    // return redirect('/teacher/create');
+    return view('home');
 });
 
+// Professor
 Route::get('/teacher/create', 'TeacherController@create');
-
 Route::post('/teacher/create', 'TeacherController@store');
+
+// Turma
+Route::get('/class/create', 'ClassController@create');
+Route::post('/class/create', 'ClassController@store');
+
+// Grade
+Route::get('/grid/create', 'GridController@create');
+Route::post('/grid/create', 'GridController@store');
