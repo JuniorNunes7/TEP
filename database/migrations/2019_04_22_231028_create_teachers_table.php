@@ -16,7 +16,7 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->enum('course', ['Sistemas de Informação', 'História', 'Educação Física', 'Fisioterapia', 'Engenharia']);
+            $table->enum('course', ['Matemática', 'História', 'Educação Física', 'Português', 'Biologia']);
             $table->timestamps();
         });
     }

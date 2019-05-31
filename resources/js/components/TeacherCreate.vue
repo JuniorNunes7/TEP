@@ -8,14 +8,14 @@
       </div>
 
       <div class="form-group">
-          <label for="course">Curso</label>
+          <label for="course">Disciplina</label>
           <select id="course" class="form-control" v-model="teacher.course">
-              <option value="" disabled="" selected="">Selecione o curso...</option>
-              <option value="Sistemas de Informação">Sistemas de Informação</option>
+              <option value="" disabled="" selected="">Selecione a disciplina...</option>
+              <option value="Matemática">Matemática</option>
               <option value="História">História</option>
               <option value="Educação Física">Educação Física</option>
-              <option value="Fisioterapia">Fisioterapia</option>
-              <option value="Engenharia">Engenharia</option>
+              <option value="Português">Português</option>
+              <option value="Biologia">Biologia</option>
           </select>
       </div>
 

@@ -39964,7 +39964,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "course" } }, [_vm._v("Curso")]),
+        _c("label", { attrs: { for: "course" } }, [_vm._v("Disciplina")]),
         _vm._v(" "),
         _c(
           "select",
@@ -39999,11 +39999,11 @@ var render = function() {
           },
           [
             _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
-              _vm._v("Selecione o curso...")
+              _vm._v("Selecione a disciplina...")
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Sistemas de Informação" } }, [
-              _vm._v("Sistemas de Informação")
+            _c("option", { attrs: { value: "Matemática" } }, [
+              _vm._v("Matemática")
             ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "História" } }, [
@@ -40014,13 +40014,11 @@ var render = function() {
               _vm._v("Educação Física")
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Fisioterapia" } }, [
-              _vm._v("Fisioterapia")
+            _c("option", { attrs: { value: "Português" } }, [
+              _vm._v("Português")
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Engenharia" } }, [
-              _vm._v("Engenharia")
-            ])
+            _c("option", { attrs: { value: "Biologia" } }, [_vm._v("Biologia")])
           ]
         )
       ]),
@@ -52511,8 +52509,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/junior/Projects/Facul/tep-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/junior/Projects/Facul/tep-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/TEP/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/TEP/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
