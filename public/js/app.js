@@ -1754,6 +1754,85 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClassCreate.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClassCreate.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    TheMask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["TheMask"]
+  },
+  data: function data() {
+    return {
+      turma: {
+        name: ''
+      }
+    };
+  },
+  methods: {
+    saveClass: function saveClass() {
+      var _this = this;
+
+      axios({
+        method: 'POST',
+        url: '/class/create',
+        data: this.turma
+      }).then(function (result) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Turma criada com sucesso!', 'success');
+
+        _this.resetForm();
+      })["catch"](function (error) {
+        var errors = _.get(error, 'response.data.errors', false);
+
+        if (errors) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', _.toArray(errors).join('<br>'), 'error');
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Erro ao criar a turma, preencha todos os campos!', 'error');
+        }
+      });
+    },
+    resetForm: function resetForm() {
+      this.turma = {
+        name: ''
+      };
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeacherCreate.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TeacherCreate.vue?vue&type=script&lang=js& ***!
@@ -1883,10 +1962,7 @@ var defaultTeacher = {
         } else {
           sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error');
         }
-
-        console.log('e', error.response);
       });
-      console.log('teste');
     }
   }
 });
@@ -39916,6 +39992,75 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-8 offset-2 col-lg-6 offset-lg-3" }, [
+      _c("h3", { staticClass: "text-center mb-3" }, [
+        _vm._v("Cadastrar Turma")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Número da Turma")]),
+          _vm._v(" "),
+          _c("the-mask", {
+            staticClass: "form-control",
+            attrs: { mask: ["###"], masked: "", autofocus: "" },
+            model: {
+              value: _vm.turma.name,
+              callback: function($$v) {
+                _vm.$set(_vm.turma, "name", $$v)
+              },
+              expression: "turma.name"
+            }
+          }),
+          _vm._v(" "),
+          _c("small", [_vm._v("OBS.: Apenas números")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group mt-5" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mr-3",
+            attrs: { type: "button" },
+            on: { click: _vm.saveClass }
+          },
+          [_vm._v("Cadastrar")]
+        ),
+        _vm._v(" "),
+        _c("a", { staticClass: "btn btn-secondary", attrs: { href: "/" } }, [
+          _vm._v("Cancelar")
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeacherCreate.vue?vue&type=template&id=34a2d7ba&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TeacherCreate.vue?vue&type=template&id=34a2d7ba& ***!
@@ -39950,7 +40095,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "nome" },
+          attrs: { type: "text", name: "nome", autofocus: "" },
           domProps: { value: _vm.teacher.name },
           on: {
             input: function($event) {
@@ -40160,14 +40305,12 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.saveTeacher }
           },
-          [_vm._v("Enviar")]
+          [_vm._v("Cadastrar")]
         ),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary", on: { click: _vm.resetForm } },
-          [_vm._v("Cancelar")]
-        )
+        _c("a", { staticClass: "btn btn-secondary", attrs: { href: "/" } }, [
+          _vm._v("Cancelar")
+        ])
       ])
     ])
   ])
@@ -52352,6 +52495,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('teacher-create', __webpack_require__(/*! ./components/TeacherCreate.vue */ "./resources/js/components/TeacherCreate.vue")["default"]);
+Vue.component('class-create', __webpack_require__(/*! ./components/ClassCreate.vue */ "./resources/js/components/ClassCreate.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52419,6 +52563,75 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/ClassCreate.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ClassCreate.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClassCreate.vue?vue&type=template&id=73a3cd79& */ "./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79&");
+/* harmony import */ var _ClassCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClassCreate.vue?vue&type=script&lang=js& */ "./resources/js/components/ClassCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ClassCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ClassCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ClassCreate.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/ClassCreate.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ClassCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClassCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ClassCreate.vue?vue&type=template&id=73a3cd79& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClassCreate.vue?vue&type=template&id=73a3cd79&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassCreate_vue_vue_type_template_id_73a3cd79___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -52509,8 +52722,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/TEP/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/TEP/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/junior/Projects/Facul/tep-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/junior/Projects/Facul/tep-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

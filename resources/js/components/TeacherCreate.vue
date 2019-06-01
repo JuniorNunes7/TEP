@@ -4,7 +4,7 @@
       <h3 class="text-center mb-3">Cadastrar Professor</h3>
       <div class="form-group">
           <label for="name">Nome do Professor</label>
-          <input type="text" name="nome" class="form-control" v-model="teacher.name">
+          <input type="text" name="nome" class="form-control" v-model="teacher.name" autofocus>
       </div>
 
       <div class="form-group">
@@ -53,8 +53,8 @@
       </div>
 
       <div class="form-group mt-5">
-          <button @click="saveTeacher" type="button" class="btn btn-primary mr-3">Enviar</button>
-          <button @click="resetForm" class="btn btn-secondary">Cancelar</button>
+          <button @click="saveTeacher" type="button" class="btn btn-primary mr-3">Cadastrar</button>
+          <a href="/" class="btn btn-secondary">Cancelar</a>
       </div>
     
     </div>
@@ -122,10 +122,7 @@ export default {
         } else {
           Swal.fire('', 'Erro ao criar professor, preencha todos os campos!', 'error')
         }
-        console.log('e', error.response);
       })
-
-      console.log('teste')
     }
   }
 }

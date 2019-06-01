@@ -17,11 +17,9 @@ class ClassController extends Controller
     public function store(ClassCreateRequest $request)
     {
         return \DB::transaction(function() use ($request) {
-            // $class = ClassModel::create($request->only('name', 'course'));
+            $class = ClassModel::create($request->only('name'));
 
-            // $class->schedules()->createMany($request->schedules);
-
-            // return $class;
+            return $class;
         });
     }
 }

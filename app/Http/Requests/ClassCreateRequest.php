@@ -26,6 +26,19 @@ class ClassCreateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => ['required', 'digits:3', 'unique:classes,name']
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Outra turma já se encontra registrada com este número!'
         ];
     }
 }
