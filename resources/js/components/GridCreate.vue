@@ -157,15 +157,16 @@ export default {
         }
     },
 
-    // watch: {
-    //     selectedClass (val) {
-    //         if(val) {
-    //             this.selectedHours = val.schedules
-    //         } else {
-    //             this.selectedHours = []
-    //         }
-    //     }
-    // },
+    watch: {
+        selectedClass (val) {
+            if(val) {
+                this.selectedHours = _.cloneDeep(val.schedules)
+                val.schedules = []
+            } else {
+                this.selectedHours = []
+            }
+        }
+    },
 
     methods: {
         isUnavailable (weekday, hour) {
