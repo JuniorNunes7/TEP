@@ -26,4 +26,4 @@ Route::post('/class/create', 'ClassController@store');
 
 // Grade
 Route::get('/grid/create', 'GridController@create');
-Route::post('/grid/create', 'GridController@store');
+Route::put('/grid/update', 'GridController@update');

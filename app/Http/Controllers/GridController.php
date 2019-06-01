@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\GridCreateRequest;
-use App\Models\Grid;
+use App\Models\{Teacher, ClassModel, Schedule};
 
 class GridController extends Controller
 {
 
     public function create()
     {
-        return view('grid-create');
+        $teachers = Teacher::with('schedules')->get();
+        $classes = ClassModel::with('schedules')->get();
+
+        return view('grid-create', compact('teachers', 'classes'));
     }
 
-    public function store(GridCreateRequest $request)
+    public function update(GridCreateRequest $request)
     {
         return \DB::transaction(function() use ($request) {
-            // $grid = Grid::create($request->only('name', 'course'));
+            $class = ClassModel::findOrFail($request->class_id);
+            Schedule::where('class_id', $class->id)->update(['class_id' => null]);
+            Schedule::whereIn('id', $request->schedules)->update(['class_id' => $class->id]);
 
-            // $grid->schedules()->createMany($request->schedules);
-
-            // return $grid;
+            return $class;
         });
     }
 }

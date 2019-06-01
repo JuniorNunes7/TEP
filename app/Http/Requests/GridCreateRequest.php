@@ -26,6 +26,9 @@ class GridCreateRequest extends FormRequest
     public function rules()
     {
         return [
+            'class_id' => ['required', 'exists:classes,id'],
+            'schedules' => ['nullable', 'array'],
+            'schedules.*' => ['required', 'integer', 'exists:schedules,id'],
         ];
     }
 }

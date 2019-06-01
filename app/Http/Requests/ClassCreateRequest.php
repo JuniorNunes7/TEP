@@ -38,7 +38,7 @@ class ClassCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => 'Outra turma já se encontra registrada com este número!'
+            'name.unique' => 'Outra turma já se encontra registrada com este mesmo número!'
         ];
     }
 }

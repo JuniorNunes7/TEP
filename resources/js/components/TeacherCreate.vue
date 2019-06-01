@@ -54,7 +54,7 @@
 
       <div class="form-group mt-5">
           <button @click="saveTeacher" type="button" class="btn btn-primary mr-3">Cadastrar</button>
-          <a href="/" class="btn btn-secondary">Cancelar</a>
+          <a href="/" class="btn btn-secondary">Voltar</a>
       </div>
     
     </div>
@@ -88,7 +88,7 @@ export default {
   data () {
     return {
       errors: {},
-      weekdays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+      weekdays: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
       teacher: _.cloneDeep(defaultTeacher)
     }
   },
@@ -112,7 +112,7 @@ export default {
         url: '/teacher/create',
         data: this.teacher
       }).then((result) => {
-        Swal.fire('', 'Professor criado com sucesso!', 'success')
+        Swal.fire('', 'Professor cadastrado com sucesso!', 'success')
         this.resetForm()
       }).catch((error) => {
         let errors = _.get(error, 'response.data.errors', false)

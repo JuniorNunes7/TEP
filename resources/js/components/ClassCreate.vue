@@ -12,7 +12,7 @@
 
       <div class="form-group mt-5">
         <button @click="saveClass" type="button" class="btn btn-primary mr-3">Cadastrar</button>
-        <a href="/" class="btn btn-secondary">Cancelar</a>
+        <a href="/" class="btn btn-secondary">Voltar</a>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@ export default {
         url: '/class/create',
         data: this.turma
       }).then((result) => {
-        Swal.fire('', 'Turma criada com sucesso!', 'success')
+        Swal.fire('', 'Turma cadastrada com sucesso!', 'success')
         this.resetForm()
       }).catch((error) => {
         let errors = _.get(error, 'response.data.errors', false)

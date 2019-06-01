@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('teacher-create', require('./components/TeacherCreate.vue').default);
 Vue.component('class-create', require('./components/ClassCreate.vue').default);
+Vue.component('grid-create', require('./components/GridCreate.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
