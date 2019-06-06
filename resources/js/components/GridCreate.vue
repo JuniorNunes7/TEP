@@ -165,7 +165,7 @@ export default {
         selectedClass (val) {
             if(val) {
                 this.selectedHours = _.cloneDeep(val.schedules)
-                val.schedules = []
+                // val.schedules = []
             } else {
                 this.selectedHours = []
             }
@@ -174,19 +174,19 @@ export default {
 
     methods: {
         isUnavailable (weekday, hour) {
-            weekday = weekdays[weekday]
-            const hours = _.filter(this.selectedClass.schedules, (s) => {
-                return s.weekday === weekday
-            })
+            // weekday = weekdays[weekday]
+            // const hours = _.filter(this.selectedClass.schedules, (s) => {
+            //     return s.weekday === weekday
+            // })
 
-            let unavailable = false
-            _.each(hours, (h) => {
-                if(h.start_time <= hour && h.end_time >= hour) {
-                    unavailable = true
-                }
-            })
+            // let unavailable = false
+            // _.each(hours, (h) => {
+            //     if(h.start_time <= hour && h.end_time >= hour) {
+            //         unavailable = true
+            //     }
+            // })
 
-            return unavailable
+            // return unavailable
         },
 
         isSelected (weekday, hour) {
@@ -254,6 +254,7 @@ export default {
                     data: data
                 }).then((result) => {
                     Swal.fire('', 'A grade foi montada com sucesso!', 'success')
+                    this.selectedClass.schedules = this.selectedHours
                 }).catch((error) => {
                     let errors = _.get(error, 'response.data.errors', false)
     
