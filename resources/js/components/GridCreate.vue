@@ -10,9 +10,9 @@
             </div>
 
             <div class="col-12">
-                <table v-if="selectedClass" class="table table-sm">
+                <table v-if="selectedClass" class="table table-sm table-bordered">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th></th>
                             <th>Segunda</th>
                             <th>Terça</th>
@@ -121,14 +121,18 @@
                     <div class="col-12" v-for="teacher in teachers" :key="teacher.id">
                         <b>{{ teacher.name }}</b>
                         
-                        <div class="col-12 mb-2" v-for="schedule in teacher.schedules" :key="schedule.id">
-                            <span>{{ schedule.start_time }} - {{ schedule.end_time }}</span>
-                            <button v-if="!isAddedHour(schedule)" @click="addHour(schedule)" :disabled="!selectedClass" 
-                                class="btn btn-sm btn-primary" 
-                            >+ Adicionar</button>
-                            <button v-else @click="removeHour(schedule)" :disabled="!selectedClass" 
-                                class="btn btn-sm btn-danger" 
-                            >x Remover</button>
+                        <div class="col-12 mb-2 row" v-for="schedule in teacher.schedules" :key="schedule.id">
+                            <div class="col-4">
+                                <span><b>({{ schedule.weekday }})</b> {{ schedule.start_time }} - {{ schedule.end_time }}</span>
+                            </div>
+                            <div class="col-6">
+                                <button v-if="!isAddedHour(schedule)" @click="addHour(schedule)" :disabled="!selectedClass || isPossible(schedule)" 
+                                    class="btn btn-sm btn-primary" 
+                                >+ Adicionar</button>
+                                <button v-else @click="removeHour(schedule)" :disabled="!selectedClass" 
+                                    class="btn btn-sm btn-danger" 
+                                >x Remover</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -211,6 +215,29 @@ export default {
 
         removeHour (schedule) {
             this.selectedHours = _.filter(this.selectedHours, h => h.id !== schedule.id)
+        },
+
+        isPossible(schedule) {
+            const hours = _.filter(this.selectedHours, (s) => {
+                return s.weekday === schedule.weekday
+            })
+
+            let isSelected = false
+
+            _.each(hours, (h) => {
+                if(
+                    (h.start_time > schedule.start_time && h.start_time < schedule.end_time) 
+                    || (h.end_time > schedule.start_time && h.end_time < schedule.end_time)
+                    || (schedule.start_time > h.start_time && schedule.start_time < h.end_time)
+                    || (schedule.end_time > h.start_time && schedule.end_time < h.end_time)
+                    || (h.start_time == schedule.start_time && h.end_time == schedule.end_time)
+                    
+                    ) {
+                    isSelected = true
+                }
+            })
+
+            return isSelected
         },
 
         save () {
