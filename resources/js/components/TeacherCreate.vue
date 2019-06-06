@@ -9,13 +9,9 @@
 
       <div class="form-group">
           <label for="course">Disciplina</label>
-          <select id="course" class="form-control" v-model="teacher.course">
+          <select id="course" class="form-control" v-model="teacher.course_id">
               <option value="" disabled="" selected="">Selecione a disciplina...</option>
-              <option value="Matemática">Matemática</option>
-              <option value="História">História</option>
-              <option value="Educação Física">Educação Física</option>
-              <option value="Português">Português</option>
-              <option value="Biologia">Biologia</option>
+              <option :value="course.id" v-for="(course, i) in courses" :key="i">{{ course.name }}</option>
           </select>
       </div>
 
@@ -37,13 +33,21 @@
               <div class="col-6">
                 <label>
                   Horário de início
-                  <the-mask :mask="['##:##']" class="form-control" masked v-model="schedule.start_time" />
+                  <select id="time_start" class="form-control" v-model="schedule.start_id">
+                    <option value="" disabled="" selected="">Selecione o horário...</option>
+                    <option :value="time.id" v-for="(time, i) in times" :key="i"
+                      :disabled="schedule.end_id && time.id >= schedule.end_id || time.interval === 1">{{ time.title }}</option>
+                  </select>
                 </label>
               </div>
               <div class="col-6">
                 <label>
                   Horário de término
-                  <the-mask :mask="['##:##']" class="form-control" masked v-model="schedule.end_time" />
+                  <select id="time_end" class="form-control" v-model="schedule.end_id">
+                    <option value="" disabled="" selected="">Selecione o horário...</option>
+                    <option :value="time.id" v-for="(time, i) in times" :key="i" 
+                      :disabled="schedule.start_id && time.id <= schedule.start_id || time.interval === 1">{{ time.title }}</option>
+                  </select>
                 </label>
               </div>
             </div>
@@ -67,14 +71,12 @@ import {TheMask} from 'vue-the-mask'
 import Swal from 'sweetalert2'
 
 const defaultSchedule = {
-  weekday: '',
-  start_time: '',
-  end_time: ''
+  weekday: ''
 }
 
 const defaultTeacher = {
   name: '',
-  course: '',
+  course_id: '',
   schedules: [
     _.cloneDeep(defaultSchedule)
   ]
@@ -82,6 +84,8 @@ const defaultTeacher = {
 
 export default {
   name: 'TeacherCreate',
+
+  props: ['courses', 'times'],
 
   components: {TheMask},
 

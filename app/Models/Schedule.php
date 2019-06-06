@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    protected $fillable = ['teacher_id', 'weekday', 'start_time', 'end_time'];
+    protected $fillable = ['teacher_id', 'weekday'];
+
+    public function times()
+    {
+        return $this->belongsToMany(Time::class, 'schedule_times');
+    }
 }

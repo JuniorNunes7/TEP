@@ -27,11 +27,11 @@ class TeacherCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:255'],
-            'course' => ['required', Rule::in(['Matemática', 'História', 'Educação Física', 'Português', 'Biologia'])],
+            'course_id' => ['required', 'exists:courses,id'],
             'schedules' => ['array', 'required'],
             'schedules.*.weekday' => ['required', Rule::in(['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'])],
-            'schedules.*.start_time' => ['required', new Time],
-            'schedules.*.end_time' => ['required', new Time],
+            'schedules.*.start_id' => ['required', 'exists:times,id'],
+            'schedules.*.end_id' => ['required', 'exists:times,id'],
         ];
     }
 }
