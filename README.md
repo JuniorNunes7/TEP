@@ -25,3 +25,5 @@ Para começar a desenvolver:
 $ npm run watch&
 $ php artisan serve&
 ```
+
+O sistema será acessível por http://localhost:8000
