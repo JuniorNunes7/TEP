@@ -18,3 +18,10 @@ No arquivo .env você deverá especificar o banco de dados, usuário e senha, e 
 ```bash
 $ php artisan migrate
 ```
+
+Para começar a desenvolver:
+
+```bash
+$ npm run watch&
+$ php artisan serve&
+```
